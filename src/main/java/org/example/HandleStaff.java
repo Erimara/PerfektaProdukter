@@ -37,6 +37,7 @@ public class HandleStaff {
             Worker worker = new Worker(createRandomID(), salary, LocalDate.parse(startDate), name.toUpperCase(), gender.toUpperCase());
             workers.add(worker);
             System.out.println("Worker: " + worker.name + " created");
+            RestartProgram.restartProgram();
         }
         if (Objects.equals(confirmation, "N".toLowerCase())){
             addWorker();
@@ -80,6 +81,7 @@ public class HandleStaff {
             RestartProgram.restartProgram();
         }
     }
+
     public String createRandomID() {
       UUID uuid = UUID.randomUUID();
       return uuid.toString();

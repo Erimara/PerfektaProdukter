@@ -3,9 +3,9 @@ package org.example;
 import java.util.Scanner;
 public class UserSelection {
 
+    static HandleStaff handleStaff = new HandleStaff();
+    static Scanner scanner = new Scanner(System.in);
     public static void userSelection() {
-        HandleStaff handleStaff = new HandleStaff();
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Welcome, what would you like to do today?");
             System.out.println("""
@@ -21,46 +21,21 @@ public class UserSelection {
                 break;
             }
             switch (choice) {
-                case 1 -> {
-                    System.out.println("Add an intern or a worker");
-                    System.out.println("1: Worker\n2: Intern");
-                    int staffChoice = scanner.nextInt();
-                    if (staffChoice == 1) {
-                        handleStaff.addWorker();
-                    } else if (staffChoice == 2) {
-                        handleStaff.addIntern();
-                    }
-                }
+                case 1 -> addStaffChoices();
+
                 case 2 -> {
-                    System.out.println("Update/remove an intern or a worker");
-                    System.out.println("1: List of Worker\n2: List of Intern");
-                    int staffChoice = scanner.nextInt();
-                    if (staffChoice == 1) {
-                        Worker.updateOrRemoveWorker(handleStaff.getWorkers());
-                    } else if (staffChoice == 2) {
-                        Intern.updateOrRemoveIntern(handleStaff.getInterns());
-                    }
+                    updateStaffChoices();
                 }
                 case 3 -> {
                     handleStaff.sortWorkersByStartDate();
-                    returnToMenu();
+                    RestartProgram.restartProgram();
                 }
                 case 4 -> {
                     handleStaff.totalNumOfStaff();
-                    returnToMenu();
+                    RestartProgram.restartProgram();
                 }
                 case 5 -> {
-                    System.out.println("1: Male\n2: Female");
-                    int maleOrFemale = scanner.nextInt();
-                    if (maleOrFemale == 1) {
-                        int averageMaleSalary = Worker.getAverageSalaryForMen(handleStaff.getWorkers());
-                        System.out.println("Average salary for men " + averageMaleSalary);
-                        returnToMenu();
-                    } else if (maleOrFemale == 2) {
-                            int averageFemaleSalary = Worker.getAverageSalaryForWomen(handleStaff.getWorkers());
-                            System.out.println("Average salary for women " + averageFemaleSalary);
-                        returnToMenu();
-                    }
+                    medianWageChoices();
                 }
                 case 6 -> {
                     System.out.println("Interns: ");
@@ -75,9 +50,37 @@ public class UserSelection {
 
         }
     }
-    public static void returnToMenu(){
-        System.out.println("Press C to return to main menu");
-        Scanner scanner = new Scanner(System.in);
-        scanner.next();
+    public static void updateStaffChoices(){
+        System.out.println("Update/remove an intern or a worker");
+        System.out.println("1: List of Worker\n2: List of Intern");
+        int staffChoice = scanner.nextInt();
+        if (staffChoice == 1) {
+            Worker.updateOrRemoveWorker(handleStaff.getWorkers());
+        } else if (staffChoice == 2) {
+            Intern.updateOrRemoveIntern(handleStaff.getInterns());
+        }
+    }
+    public static void addStaffChoices() {
+        System.out.println("Add an intern or a worker");
+        System.out.println("1: Worker\n2: Intern");
+        int staffChoice = scanner.nextInt();
+        if (staffChoice == 1) {
+            handleStaff.addWorker();
+        } else if (staffChoice == 2) {
+            handleStaff.addIntern();
+        }
+    }
+    public static void medianWageChoices(){
+        System.out.println("1: Male\n2: Female");
+        int maleOrFemale = scanner.nextInt();
+        if (maleOrFemale == 1) {
+            int averageMaleSalary = Worker.getAverageSalaryForMen(handleStaff.getWorkers());
+            System.out.println("Average salary for men " + averageMaleSalary);
+            RestartProgram.restartProgram();
+        } else if (maleOrFemale == 2) {
+            int averageFemaleSalary = Worker.getAverageSalaryForWomen(handleStaff.getWorkers());
+            System.out.println("Average salary for women " + averageFemaleSalary);
+            RestartProgram.restartProgram();
+        }
     }
 }

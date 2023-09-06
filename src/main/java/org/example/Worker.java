@@ -2,7 +2,6 @@ package org.example;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Worker extends Staff implements Comparable<Worker>{
@@ -16,34 +15,33 @@ public LocalDate startDate;
 
     public static int getAverageSalaryForMen(List<Worker> workers) {
         int totalSalary = 0;
-        int maleHolder = 0;
+        int men = 0;
         for (Worker worker : workers) {
             if ("MALE".equals(worker.gender)) {
                 totalSalary += worker.salary;
-                maleHolder++;
+                men++;
             }
         }
-        if(maleHolder > 0){
-            return totalSalary / maleHolder;
+        if(men > 0){
+            return totalSalary / men;
         }
         return totalSalary;
     }
     public static int getAverageSalaryForWomen(List<Worker> workers) {
         int totalSalary = 0;
-        int femaleHolder = 0;
+        int women = 0;
         for (Worker worker : workers) {
             if ("FEMALE".equals(worker.gender)) {
                 totalSalary += worker.salary;
-                femaleHolder++;
+                women++;
             }
         }
-        if(femaleHolder > 0){
-            return totalSalary / femaleHolder;
+        if(women > 0){
+            return totalSalary / women;
         }
 
         return totalSalary;
     }
-
     public static void getWorkerList(List<Worker> workerList){
         for (Worker worker : workerList) {
             System.out.println(" ID: " + worker.id + " Name: " + worker.name +
@@ -53,19 +51,16 @@ public LocalDate startDate;
 
         }
     }
-
     static Scanner scanner = new Scanner(System.in);
     public static void updateOrRemoveWorker(List<Worker> workerList) {
         getWorkerList(workerList);
 
         if (workerList.isEmpty()) {
-            System.out.println("No persons in the system. Returning");
+            System.out.println("There are currently no workers");
             return;
         }
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter the ID of the person you want to edit or remove:");
+        System.out.println("Enter or copy and paste the id of the person you want to edit or remove");
         String enteredId = scanner.next().trim();
 
         Worker selectedWorker = null;
@@ -95,7 +90,7 @@ public LocalDate startDate;
         }
 
         if (choice == 1) {
-            System.out.println("Update salary for " + selectedWorker.name + "?");
+            System.out.println("You have updated" + selectedWorker.name + "s" + " salary to" + selectedWorker.salary);
             Worker.updateSalary(selectedWorker);
         } else if (choice == 2) {
             System.out.println("Are you sure you want to remove " + selectedWorker.name + "? (1 to confirm, 0 to cancel)");
