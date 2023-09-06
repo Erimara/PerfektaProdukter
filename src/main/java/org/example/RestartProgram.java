@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.Objects;
 import java.util.Scanner;
-
 public class RestartProgram {
     public static void restartProgram(){
         Scanner scanner = new Scanner(System.in);

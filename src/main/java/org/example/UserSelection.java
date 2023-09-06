@@ -22,7 +22,7 @@ public class UserSelection {
             }
             switch (choice) {
                 case 1 -> {
-                    System.out.println("Would you like to add an intern or a worker?");
+                    System.out.println("Add an intern or a worker");
                     System.out.println("1: Worker\n2: Intern");
                     int staffChoice = scanner.nextInt();
                     if (staffChoice == 1) {
@@ -32,7 +32,7 @@ public class UserSelection {
                     }
                 }
                 case 2 -> {
-                    System.out.println("Would you like to update information for an intern or a worker?");
+                    System.out.println("Update/remove an intern or a worker");
                     System.out.println("1: List of Worker\n2: List of Intern");
                     int staffChoice = scanner.nextInt();
                     if (staffChoice == 1) {

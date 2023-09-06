@@ -55,75 +55,60 @@ public LocalDate startDate;
     }
 
     static Scanner scanner = new Scanner(System.in);
-    public static void updateOrRemoveWorker(List<Worker> workerList){
+    public static void updateOrRemoveWorker(List<Worker> workerList) {
         getWorkerList(workerList);
 
-        if (workerList.isEmpty()){
+        if (workerList.isEmpty()) {
             System.out.println("No persons in the system. Returning");
+            return;
         }
-        for (int i = 0; i < workerList.size(); i++) {
-            Worker worker = workerList.get(i);
-            System.out.println("""
-                    1:Update a workers salary\s
-                     2:Remove a worker
-                    0: Exit""");
-            int choice = scanner.nextInt();
-            if (choice == 0){
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the ID of the person you want to edit or remove:");
+        String enteredId = scanner.next().trim();
+
+        Worker selectedWorker = null;
+
+        for (Worker worker : workerList) {
+            if (enteredId.equals(worker.id)) {
+                selectedWorker = worker;
                 break;
             }
-            if (choice == 1){
-                System.out.println("Copy the id of the person you would like to edit\n" +
-                        " Press 0 to cancel");
-                String internId = scanner.next();
+        }
 
-                if(Objects.equals(internId, worker.id)){
-                    System.out.println("Please press 1 to confirm that you want to update the salary for: " + worker.name+"\n" +
-                            "Press 0 to cancel");
-                    int confirm = scanner.nextInt();
+        if (selectedWorker == null) {
+            System.out.println("ID does not exist");
+            RestartProgram.restartProgram();
+            return;
+        }
 
-                    if (confirm == 0){
-                        break;
-                    }
-                    else if (confirm == 1) {
-                        continue;
-                    }
-                    Worker.updateSalary(worker);
-                } else {
-                    System.out.println("Name does not exist");
-                    RestartProgram.restartProgram();
-                }
-            } else if (choice == 2){
-                System.out.println("Copy the id of the person you would like to remove\n" +
-                        " Press 0 to cancel");
-                String internID = scanner.next();
+        System.out.println("""
+            1: Update a worker's salary
+            2: Remove a worker
+            0: Exit""");
 
-                if(Objects.equals(internID, worker.id)){
-                    System.out.println("Please press 1 to confirm that you want to remove: " + worker.name+"\n" +
-                            "Press 0 to cancel");
-                    int confirm = scanner.nextInt();
+        int choice = scanner.nextInt();
 
-                    if (confirm == 0){
-                        break;
-                    }
-                    else if (confirm == 1) {
-                        continue;
-                    }
-                    workerList.remove(worker);
-                    i--;
+        if (choice == 0) {
+            return;
+        }
 
-                    System.out.println("Name: " + worker.name + " removed " + " Press 0 to exit");
-                    scanner.nextInt();
+        if (choice == 1) {
+            System.out.println("Update salary for " + selectedWorker.name + "?");
+            Worker.updateSalary(selectedWorker);
+        } else if (choice == 2) {
+            System.out.println("Are you sure you want to remove " + selectedWorker.name + "? (1 to confirm, 0 to cancel)");
+            int confirm = scanner.nextInt();
 
-                    RestartProgram.restartProgram();
-                } else {
-                    System.out.println("ID does not exist");
-                    RestartProgram.restartProgram();
-                }
+            if (confirm == 1) {
+                workerList.remove(selectedWorker);
+                System.out.println(selectedWorker.name + " removed");
             }
         }
+
     }
     public static void updateSalary(Worker worker){
-        scanner.nextLine();
         System.out.println("Current salary: " + worker.salary + " Write a new salary: ");
         int newSalary = scanner.nextInt();
 
