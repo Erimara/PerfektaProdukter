@@ -1,4 +1,8 @@
-package org.example;
+package org.example.handleStaff;
+
+import org.example.staff.Intern;
+import org.example.utility.Utility;
+import org.example.staff.Worker;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -27,13 +31,13 @@ public class AddStaff {
             Worker worker = new Worker(utility.createRandomID(), salary, LocalDate.parse(startDate), name.toUpperCase(), gender.toUpperCase());
             workers.add(worker);
             System.out.println("Worker: " + worker.name + " created");
-            RestartProgram.restartProgram();
+            Utility.restartProgram();
         }
         if (Objects.equals(confirmation, "R".toLowerCase())){
             addWorker();
         }
         if (Objects.equals(confirmation, "E".toLowerCase())){
-            RestartProgram.restartProgram();
+            Utility.restartProgram();
         }
     }
     private void addIntern() {
@@ -58,13 +62,13 @@ public class AddStaff {
             Intern intern = new Intern(utility.createRandomID(),LocalDate.parse(endDate), name.toUpperCase(), gender.toUpperCase(), recommendationText);
             interns.add(intern);
             System.out.println("Intern: " + intern.name + " created");
-            RestartProgram.restartProgram();
+            Utility.restartProgram();
         }
         if (Objects.equals(confirmation, "R".toLowerCase())){
             addIntern();
         }
         if (Objects.equals(confirmation, "E".toLowerCase())){
-            RestartProgram.restartProgram();
+            Utility.restartProgram();
         }
     }
     private String getDate(int opt){

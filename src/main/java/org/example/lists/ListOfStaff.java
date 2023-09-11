@@ -1,5 +1,7 @@
-package org.example;
+package org.example.lists;
 
+import org.example.staff.Intern;
+import org.example.staff.Worker;
 import java.util.List;
 
 public class ListOfStaff {

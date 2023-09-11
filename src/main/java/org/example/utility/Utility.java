@@ -1,4 +1,7 @@
-package org.example;
+package org.example.utility;
+
+import org.example.staff.Intern;
+import org.example.staff.Worker;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,5 +36,10 @@ public class Utility {
             startDate = scanner.next();
         }
         return startDate;
+    }
+    public static void restartProgram(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("To return to the main menu, press 'c' ");
+        scanner.nextLine();
     }
 }

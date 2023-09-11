@@ -1,4 +1,11 @@
-package org.example;
+package org.example.menu;
+
+import org.example.lists.ListOfStaff;
+import org.example.staff.Worker;
+import org.example.handleStaff.AddStaff;
+import org.example.handleStaff.HandleIntern;
+import org.example.handleStaff.HandleWorker;
+import org.example.utility.Utility;
 
 import java.util.Scanner;
 public class MainMenu {
@@ -28,12 +35,12 @@ public class MainMenu {
                 case 3 -> {
                     Utility utility = new Utility();
                     utility.sortWorkersByStartDate(addStaff.getWorkers());
-                    RestartProgram.restartProgram();
+                    Utility.restartProgram();
                 }
                 case 4 -> {
                     Utility utility = new Utility();
                     utility.totalNumOfStaff(addStaff.getWorkers(), addStaff.getInterns());
-                    RestartProgram.restartProgram();
+                    Utility.restartProgram();
                 }
                 case 5 -> {
                     int averageSalary = Worker.getAverageSalary(addStaff.getWorkers());
@@ -46,7 +53,7 @@ public class MainMenu {
                     listOfStaff.getListOfInterns(addStaff.getInterns());
                     System.out.println("Workers: ");
                     listOfStaff.getListOfWorkers(addStaff.getWorkers());
-                    RestartProgram.restartProgram();
+                    Utility.restartProgram();
                 }
                 default -> System.out.println("Invalid choice");
             }

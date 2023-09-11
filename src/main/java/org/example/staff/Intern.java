@@ -1,7 +1,8 @@
-package org.example;
+package org.example.staff;
+
 import java.time.LocalDate;
 import java.util.Scanner;
-public class Intern extends Staff{
+public class Intern extends Staff {
     public LocalDate endDate;
     public String recommendationText;
 public Intern(String id, LocalDate endDate, String name, String gender, String recommendationText) {

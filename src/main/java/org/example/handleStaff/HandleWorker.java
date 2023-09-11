@@ -1,4 +1,8 @@
-package org.example;
+package org.example.handleStaff;
+
+import org.example.lists.ListOfStaff;
+import org.example.staff.Worker;
+import org.example.utility.Utility;
 
 import java.util.List;
 import java.util.Scanner;
@@ -32,7 +36,7 @@ public class HandleWorker {
         Scanner scanner = new Scanner(System.in);
         if (selectedWorker == null) {
             System.out.println("ID does not exist");
-            RestartProgram.restartProgram();
+            Utility.restartProgram();
             return;
         }
 
@@ -49,7 +53,7 @@ public class HandleWorker {
         if (choice == 1) {
             Worker.updateSalary(selectedWorker);
             System.out.println("You have updated " + workerName + "s " + " salary to " + selectedWorker.salary);
-            RestartProgram.restartProgram();
+            Utility.restartProgram();
         } else if (choice == 2) {
             System.out.println("Are you sure you want to remove " + workerName + "? (1 to confirm, 0 to cancel)");
             int confirm = scanner.nextInt();
@@ -57,7 +61,7 @@ public class HandleWorker {
             if (confirm == 1) {
                 workerList.remove(selectedWorker);
                 System.out.println(workerName + " removed");
-                RestartProgram.restartProgram();
+                Utility.restartProgram();
             }
         }
     }

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.staff;
 
 import java.time.LocalDate;
 import java.util.List;
