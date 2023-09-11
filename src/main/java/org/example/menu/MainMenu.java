@@ -35,16 +35,17 @@ public class MainMenu {
                 case 3 -> {
                     Utility utility = new Utility();
                     utility.sortWorkersByStartDate(addStaff.getWorkers());
-                    Utility.restartProgram();
+                    Utility.returnToMainMenu();
                 }
                 case 4 -> {
                     Utility utility = new Utility();
                     utility.totalNumOfStaff(addStaff.getWorkers(), addStaff.getInterns());
-                    Utility.restartProgram();
+                    Utility.returnToMainMenu();
                 }
                 case 5 -> {
                     int averageSalary = Worker.getAverageSalary(addStaff.getWorkers());
-                    System.out.println(averageSalary);
+                    System.out.println("Average salary: " + averageSalary + "€");
+                    Utility.returnToMainMenu();
                 }
 
                 case 6 -> {
@@ -53,7 +54,7 @@ public class MainMenu {
                     listOfStaff.getListOfInterns(addStaff.getInterns());
                     System.out.println("Workers: ");
                     listOfStaff.getListOfWorkers(addStaff.getWorkers());
-                    Utility.restartProgram();
+                    Utility.returnToMainMenu();
                 }
                 default -> System.out.println("Invalid choice");
             }

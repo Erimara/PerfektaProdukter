@@ -33,12 +33,12 @@ public class HandleIntern {
         Scanner scanner = new Scanner(System.in);
         if (selectedIntern == null){
             System.out.println("ID does not exist");
-            Utility.restartProgram();
+            Utility.returnToMainMenu();
             return;
         }
 
         String internName = selectedIntern.name.toUpperCase();
-        System.out.println("Selected intern : " + internName + """
+        System.out.println("Selected worker: " + internName + "\n" + """
                 1: Update Interns recommendation text
                 2: Remove Intern
                 0: Exit""");
@@ -50,15 +50,15 @@ public class HandleIntern {
         if (choice == 1){
             Intern.updateRecommendationText(selectedIntern);
             System.out.println("You have updated " + internName + "s" + " recommendation text to " + "'"+ selectedIntern.recommendationText +"'");
-            Utility.restartProgram();
+            Utility.returnToMainMenu();
 
         } else if (choice == 2) {
-            System.out.println("Are you sure you want to remove " + internName + "?" + " 1: Confirm. 0:Return");
+            System.out.println("Are you sure you want to remove " + internName + "? " + " 1: Confirm. 0:Return");
             int confirm = scanner.nextInt();
             if (confirm == 1){
                 internList.remove(selectedIntern);
                 System.out.println(internName + " removed");
-                Utility.restartProgram();
+                Utility.returnToMainMenu();
             }
         }
     }

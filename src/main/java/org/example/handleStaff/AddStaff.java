@@ -22,8 +22,8 @@ public class AddStaff {
                         "\nName:" + name.toUpperCase() +
                         "\nGender:" + gender.toUpperCase() +
                         "\nStart Date:" + startDate +
-                        "\nSalary:" + salary  +
-                        "\nPress Y to confirm, R to return or E to exit:"
+                        "\nSalary:" + salary  + "€" +
+                        "\nPress Y to confirm, R to restart or E to to exit to main menu:"
         );
         String confirmation = scanner.next();
         if (Objects.equals(confirmation, "Y".toLowerCase())){
@@ -31,13 +31,13 @@ public class AddStaff {
             Worker worker = new Worker(utility.createRandomID(), salary, LocalDate.parse(startDate), name.toUpperCase(), gender.toUpperCase());
             workers.add(worker);
             System.out.println("Worker: " + worker.name + " created");
-            Utility.restartProgram();
+            Utility.returnToMainMenu();
         }
         if (Objects.equals(confirmation, "R".toLowerCase())){
             addWorker();
         }
         if (Objects.equals(confirmation, "E".toLowerCase())){
-            Utility.restartProgram();
+            Utility.returnToMainMenu();
         }
     }
     private void addIntern() {
@@ -54,7 +54,7 @@ public class AddStaff {
                         "\ngender:" + gender.toUpperCase() +
                         "\nEnd Date:" + endDate  +
                         "\nRecommendation:" + recommendationText +
-                        "\nPress Y to confirm, R to return or E to exit:"
+                        "\nPress Y to confirm, R to restart or E to to exit to main menu:"
         );
 
         String confirmation = scanner.next();
@@ -62,13 +62,13 @@ public class AddStaff {
             Intern intern = new Intern(utility.createRandomID(),LocalDate.parse(endDate), name.toUpperCase(), gender.toUpperCase(), recommendationText);
             interns.add(intern);
             System.out.println("Intern: " + intern.name + " created");
-            Utility.restartProgram();
+            Utility.returnToMainMenu();
         }
         if (Objects.equals(confirmation, "R".toLowerCase())){
             addIntern();
         }
         if (Objects.equals(confirmation, "E".toLowerCase())){
-            Utility.restartProgram();
+            Utility.returnToMainMenu();
         }
     }
     private String getDate(int opt){
@@ -104,7 +104,12 @@ public class AddStaff {
         System.out.println("Please enter a salary");
         return scanner.nextInt();
     }
-
+    public List<Worker> getWorkers() {
+        return workers;
+    }
+    public List<Intern> getInterns() {
+        return interns;
+    }
     public void selectWorkerOrIntern(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Add an intern or a worker");
@@ -115,12 +120,5 @@ public class AddStaff {
         } else if (staffChoice == 2) {
             addIntern();
         }
-    }
-
-    public List<Worker> getWorkers() {
-        return workers;
-    }
-    public List<Intern> getInterns() {
-        return interns;
     }
 }

@@ -36,12 +36,12 @@ public class HandleWorker {
         Scanner scanner = new Scanner(System.in);
         if (selectedWorker == null) {
             System.out.println("ID does not exist");
-            Utility.restartProgram();
+            Utility.returnToMainMenu();
             return;
         }
 
         String workerName = selectedWorker.name.toUpperCase();
-        System.out.println("Selected worker: " + workerName + """
+        System.out.println("Selected worker: " + workerName + "\n" + """
             1: Update salary
             2: Remove worker
             0: Exit""");
@@ -52,16 +52,16 @@ public class HandleWorker {
         }
         if (choice == 1) {
             Worker.updateSalary(selectedWorker);
-            System.out.println("You have updated " + workerName + "s " + " salary to " + selectedWorker.salary);
-            Utility.restartProgram();
+            System.out.println("You have updated " + workerName + "s " + " salary to " + selectedWorker.salary + "€");
+            Utility.returnToMainMenu();
         } else if (choice == 2) {
-            System.out.println("Are you sure you want to remove " + workerName + "? (1 to confirm, 0 to cancel)");
+            System.out.println("Are you sure you want to remove " + workerName + "? " + " 1: Confirm. 0: Return");
             int confirm = scanner.nextInt();
 
             if (confirm == 1) {
                 workerList.remove(selectedWorker);
                 System.out.println(workerName + " removed");
-                Utility.restartProgram();
+                Utility.returnToMainMenu();
             }
         }
     }

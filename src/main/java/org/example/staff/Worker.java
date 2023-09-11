@@ -14,7 +14,7 @@ public class Worker extends Staff implements Comparable<Worker>{
     }
     public static int getAverageSalary(List<Worker> workers) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("1: Male\n2: Female");
+        System.out.println("1: Men\n2: Women");
         int maleOrFemale = scanner.nextInt();
 
         int totalSalaryForWomen = 0;
@@ -47,12 +47,12 @@ public class Worker extends Staff implements Comparable<Worker>{
     }
     public static void updateSalary(Worker worker){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Worker: " + worker.name  + " Current salary " + worker.salary + "\n" +
+        System.out.println("Worker: " + worker.name  + " Current salary " + worker.salary + "€" + "\n" +
                 "Please write a new salary");
         int newSalary = scanner.nextInt();
 
         worker.setSalary(newSalary);
-        System.out.println("Salary updated : " + worker.salary + " for " + worker.name);
+        System.out.println("Salary updated : " + worker.salary + "USD for " + worker.name);
     }
     private void setSalary(int salary) {
         this.salary = salary;
@@ -61,5 +61,4 @@ public class Worker extends Staff implements Comparable<Worker>{
     public int compareTo(Worker date) {
         return this.startDate.compareTo(date.startDate);
     }
-
 }

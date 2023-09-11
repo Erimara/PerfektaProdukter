@@ -20,5 +20,4 @@ public Intern(String id, LocalDate endDate, String name, String gender, String r
     public void setRecommendationText(String recommendationText) {
         this.recommendationText = recommendationText;
     }
-
     }
