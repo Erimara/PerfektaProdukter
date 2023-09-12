@@ -1,22 +1,20 @@
 package org.example.handleStaff;
-
 import org.example.staff.Intern;
 import org.example.utility.Utility;
 import org.example.staff.Worker;
-
 import java.time.LocalDate;
 import java.util.*;
 public class AddStaff {
     private final List<Worker> workers = new ArrayList<>();
     private final List<Intern> interns = new ArrayList<>();
-    private void addWorker() {
+    public void addWorker() {
         Scanner scanner = new Scanner(System.in);
         Utility utility = new Utility();
-
-        String name = getName();
-        String startDate = getDate(1);
-        String gender = getGender();
-        int salary = getSalary();
+        CreateNewStaff createNewStaff = new CreateNewStaff();
+        String name = createNewStaff.getName();
+        String startDate = createNewStaff.getDate(1);
+        String gender = createNewStaff.getGender();
+        int salary = createNewStaff.getSalary();
         System.out.println(
                 "You have entered the following:\n" +
                         "\nName:" + name.toUpperCase() +
@@ -33,21 +31,17 @@ public class AddStaff {
             System.out.println("Worker: " + worker.name + " created");
             Utility.returnToMainMenu();
         }
-        if (Objects.equals(confirmation, "R".toLowerCase())){
-            addWorker();
-        }
-        if (Objects.equals(confirmation, "E".toLowerCase())){
-            Utility.returnToMainMenu();
-        }
+        resetOrExit(confirmation,1);
     }
-    private void addIntern() {
+    public void addIntern() {
         Scanner scanner = new Scanner(System.in);
-
         Utility utility = new Utility();
-        String name = getName();
-        String endDate = getDate(2);
-        String gender = getGender();
-        String recommendationText = getRecommendationText();
+        CreateNewStaff createNewStaff = new CreateNewStaff();
+
+        String name = createNewStaff.getName();
+        String endDate = createNewStaff.getDate(2);
+        String gender = createNewStaff.getGender();
+        String recommendationText = createNewStaff.getRecommendationText();
         System.out.println(
                 "You have entered the following:\n" +
                         "\nName:" + name.toUpperCase() +
@@ -64,53 +58,21 @@ public class AddStaff {
             System.out.println("Intern: " + intern.name + " created");
             Utility.returnToMainMenu();
         }
+        resetOrExit(confirmation, 2);
+    }
+    private void resetOrExit(String confirmation, int opt){
         if (Objects.equals(confirmation, "R".toLowerCase())){
-            addIntern();
+            if(opt == 1){
+                addWorker();
+            } else if (opt == 2) {
+                addIntern();
+            }
         }
         if (Objects.equals(confirmation, "E".toLowerCase())){
             Utility.returnToMainMenu();
         }
     }
-    private String getDate(int opt){
-        Scanner scanner = new Scanner(System.in);
-        Utility utility = new Utility();
-        if (opt == 1){
-            System.out.println("Please enter a start date yyyy-mm-dd");
-
-        } else if (opt == 2){
-            System.out.println("Please enter a end date yyyy-mm-dd");
-        }
-        String date = scanner.next();
-        date = utility.checkIfValidDate(date);
-        return date;
-    }
-    private String getName() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter a name");
-        return scanner.nextLine();
-    }
-    private String getGender(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter a gender: Only Male, female or other");
-      return scanner.next();
-    }
-    private String getRecommendationText(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Write a recommendation about the intern. Press '-' to fill in later");
-        return scanner.next();
-    }
-    private int getSalary(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter a salary");
-        return scanner.nextInt();
-    }
-    public List<Worker> getWorkers() {
-        return workers;
-    }
-    public List<Intern> getInterns() {
-        return interns;
-    }
-    public void selectWorkerOrIntern(){
+    public void AddWorkerOrInternOption(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Add an intern or a worker");
         System.out.println("1: Worker\n2: Intern");
@@ -120,5 +82,24 @@ public class AddStaff {
         } else if (staffChoice == 2) {
             addIntern();
         }
+    }
+    public void updateOrRemoveOption(){
+        Scanner scanner = new Scanner(System.in);
+        HandleWorker handleWorker = new HandleWorker();
+        HandleIntern handleIntern = new HandleIntern();
+        System.out.println("Update/remove an intern or a worker");
+        System.out.println("1: List of Worker\n2: List of Intern");
+        int staffChoice = scanner.nextInt();
+        if (staffChoice == 1) {
+            handleWorker.updateOrRemoveWorker(getWorkers());
+        } else if (staffChoice == 2) {
+            handleIntern.updateOrRemoveIntern(getInterns());
+        }
+    }
+    public List<Worker> getWorkers() {
+        return workers;
+    }
+    public List<Intern> getInterns() {
+        return interns;
     }
 }

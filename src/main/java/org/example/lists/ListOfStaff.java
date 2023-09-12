@@ -11,7 +11,6 @@ public class ListOfStaff {
                     " SALARY: " + worker.salary + "€," +
                     " START DATE: " + worker.startDate + "," +
                     " GENDER: " + worker.gender);
-
         }
     };
     public void getListOfInterns(List<Intern> internList) {
